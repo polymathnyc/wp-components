@@ -11,16 +11,15 @@
 	
 	//config 
 
-	$columns = "3"; 						// number of columns (2 or 3)
-	$category= "1";							// category to loop through (category ID)
-	$grid_title = "Responsive Grid Demo"; 	// Title to display above grid (optional)
-	$cell_titles = TRUE; 					// Display post titles in each cell (TRUE or FALSE)
-	$cells_per_page = "21"; 				// number of cells per page ("-1" for no pagination)
-
+	$columns = "3"; 							// number of columns (2 or 3)
+	$category= "2";								// category to loop through (category ID)
+	$grid_title = "Responsive Grid Component"; 	// Title to display above grid (optional)
+	$cell_titles = TRUE; 						// Display post titles in each cell (TRUE or FALSE)
+	$pagination = TRUE; 						// Display pagination at bottom of grid (TRUE or FALSE)
+	$cells_per_page = "5"; 						// number of cells per page ("-1" for no pagination)
 
 
  /* ========================================================= */
-
 
 
 
@@ -55,30 +54,69 @@
 	  		
 	  		<?php if ($grid_title): ?>	
 	  			<h1 class="grid-title"><?php echo $grid_title; ?></h1>
-		    <?php endif; ?>
-		    
-		    <ul class="grid-component">
-				<?php
-					$args = array(
-						'category_name'      => $category,
-						'posts_per_page'     => $posts_per_page 
-					);
-					query_posts( $args );
-					if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>			
-				        <li>
-				            <?php if ( has_post_thumbnail() ) : ?>
-					            <a href="<?php the_permalink();?>">
-					              <?php the_post_thumbnail(); ?>
-					            </a>
-					        <?php endif; ?>
-				            <?php if ( $cell_titles == TRUE ) : ?>
-						    <h2> 
-				              	<a href="<?php the_permalink();?>"><?php the_title();?></a>
-				            </h2>
-					        <?php endif; ?>
-				         </li>
-					<?php endwhile; endif; ?>
-			</ul>
+		    <?php endif;
+				
+				// query posts
+
+				$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+				$args = array(
+					'category' => $category,
+					'posts_per_page' => $cells_per_page,
+					'paged' => $paged
+				);
+				query_posts( $args );
+				if ( have_posts() ) : ?>
+	    			
+	    			<ul class="grid-component">
+
+	    				<?php
+
+						// loop through grid cells
+
+						while ( have_posts() ) : the_post(); ?>			
+					        <li>
+					            <?php if ( has_post_thumbnail() ) : ?>
+						            <a href="<?php the_permalink();?>">
+						              <?php the_post_thumbnail(); ?>
+						            </a>
+						        <?php endif; ?>
+					            <?php if ( $cell_titles == TRUE ) : ?>
+							    <h2> 
+					              	<a href="<?php the_permalink();?>"><?php the_title();?></a>
+					            </h2>
+						        <?php endif; ?>
+					         </li>
+						<?php endwhile; ?>
+
+					</ul>
+
+					<?php
+
+					// pagination
+
+					if ($pagination == TRUE): ?>
+
+						<div class="grid-pagination">
+
+							<?php 
+	
+							$big = 999999999; // need an unlikely integer
+							
+							echo paginate_links( array(
+								'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+								'format' => '?paged=%#%',
+								'current' => max( 1, get_query_var('paged') ),
+								'total' => $wp_query->max_num_pages
+							) );
+	
+							?>
+
+						</div>
+					
+					<?php endif; 
+
+				endif; ?>
+
 		</section>
 
-	<?php endelse; ?>
+	<?php endif; ?>
