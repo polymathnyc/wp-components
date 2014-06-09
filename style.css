@@ -1,3 +1,24 @@
+/*
+Theme Name: Bonzai
+Theme URI: http://bonz.ai
+Description: Responsive theme supported in all major browsers
+Author: Andrew Bowles
+Author URI: http://andrewbowles.com/
+Version: 1.0
+Tags: responsive, white, bootstrap
+
+License: Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+License URI: http://creativecommons.org/licenses/by-sa/3.0/
+
+This simple theme was built using the example Bootstrap theme "Basic marketing site" found on the Bootstrap web site http://twitter.github.com/bootstrap/examples/hero.html
+*/
+
+@import url('bootstrap/css/bootstrap.css'); 
+@import url('bootstrap/css/bootstrap-responsive.css'); 
+body { 
+     padding-top: 60px; 
+     padding-bottom: 40px; 
+}
 
 /* 
  * responsive grid 
@@ -11,8 +32,7 @@
 .grid-component-wrapper .grid-component li {
 	display: inline-block;
 	float: left;
-	width: calc(33.3333% - 20px);
-	margin: 10px;
+	margin: 20px 10px;
 }
 .grid-component-wrapper .grid-component li img {
 	width: 100%;
@@ -23,3 +43,42 @@
 	width: calc(100% - 20px);
 	padding: 0 10px;
 }
+.grid-component-wrapper.col-2 .grid-component li {
+	width: calc(50% - 20px);
+}
+.grid-component-wrapper.col-3 .grid-component li {
+	width: calc(33.3333% - 20px);
+}
+.grid-component-wrapper.col-4 .grid-component li {
+	width: calc(25% - 20px);
+}
+
+/* reduce to 3 columns */
+
+@media (min-width: 768px) and (max-width: 979px) {
+	.grid-component-wrapper.col-4 .grid-component li {
+		width: calc(33.3333% - 20px);
+	}
+}
+
+/* reduce to 2 columns */
+
+@media (min-width: 480px) and (max-width: 767px) {
+	.grid-component-wrapper.col-4 .grid-component li,
+	.grid-component-wrapper.col-3 .grid-component li {
+		width: calc(50% - 20px);
+	}
+}
+
+/* reduce to 1 column */
+
+@media (max-width: 479px) {
+	.grid-component-wrapper.col-4 .grid-component li,
+	.grid-component-wrapper.col-3 .grid-component li,
+	.grid-component-wrapper.col-2 .grid-component li {
+		width: calc(100% - 20px);
+	}
+}
+
+
+

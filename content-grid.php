@@ -11,15 +11,16 @@
 	
 	//config 
 
-	$columns = "3"; 							// number of columns (2 or 3)
-	$category= "2";								// category to loop through (category ID)
+	$columns = "3"; 						// number of columns (2, 3 or 4)
+	$category= "2";							// category to loop through (category ID)
 	$grid_title = "Responsive Grid Component"; 	// Title to display above grid (optional)
-	$cell_titles = TRUE; 						// Display post titles in each cell (TRUE or FALSE)
-	$pagination = TRUE; 						// Display pagination at bottom of grid (TRUE or FALSE)
-	$cells_per_page = "5"; 						// number of cells per page ("-1" for no pagination)
+	$cell_titles = TRUE; 					// Display post titles in each cell (TRUE or FALSE)
+	$pagination = TRUE; 					// Display pagination at bottom of grid (TRUE or FALSE)
+	$cells_per_page = "5"; 					// number of cells per page ("-1" for no pagination)
 
 
  /* ========================================================= */
+
 
 
 
@@ -27,10 +28,9 @@
 
 	$error = "";
 
-	if (($columns != 2) && ($columns != 3)) {
-		$error .= "Please specify a valid number of columns (2 or 3)";
-	}
-	$columns = strval($columns); 
+	if (($columns != 2) && ($columns != 3) && ($columns != 4)) {
+		$error .= "Please specify a valid number of columns (2, 3 or 4)";
+	} 
 
 	$term = term_exists(get_category($category)->name, 'category');
 	if ($term == 0 || $term == null) {
@@ -50,7 +50,7 @@
 
 	?>
   	
-	  	<section class="grid-component-wrapper <?php echo $columns;?>">
+	  	<section class="grid-component-wrapper col-<?php echo $columns;?>">
 	  		
 	  		<?php if ($grid_title): ?>	
 	  			<h1 class="grid-title"><?php echo $grid_title; ?></h1>
