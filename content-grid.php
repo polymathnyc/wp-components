@@ -9,18 +9,18 @@
  * =========================================================
  */
 	
-	//config 
 
-	$columns = "3"; 						// number of columns (2, 3 or 4)
-	$category= "2";							// category to loop through (category ID)
+	// config options
+
+	$columns = "3"; 							// number of columns (2, 3 or 4)
+	$category= "2";								// category to loop through (category ID)
 	$grid_title = "Responsive Grid Component"; 	// Title to display above grid (optional)
-	$cell_titles = TRUE; 					// Display post titles in each cell (TRUE or FALSE)
-	$pagination = TRUE; 					// Display pagination at bottom of grid (TRUE or FALSE)
-	$cells_per_page = "5"; 					// number of cells per page ("-1" for no pagination)
+	$cell_titles = TRUE; 						// Display post titles in each cell (TRUE or FALSE)
+	$pagination = TRUE; 						// Display pagination at bottom of grid (TRUE or FALSE)
+	$cells_per_page = "5"; 						// number of cells per page ("-1" for no pagination)
 
 
  /* ========================================================= */
-
 
 
 
