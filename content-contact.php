@@ -10,32 +10,39 @@
 	
 
 	// config options
+	$form_title = "Contact Us"; 				// Title to display above form (optional)
+	$columns = "3"; 							// number of columns (2, 3 or 4)
 
-	$columns = "3"; 						// number of columns (2, 3 or 4)
+	$text_inputs = array(
+			array( 
+			  "id" => "firstname", 				// will be used as input name and class attributes (spaces prohibited)
+	    	  "label" => "First Name",			// label displayed to consumer
+	    	  "required" => TRUE 				// field required to submit form (TRUE or FALSE)
+	    	),
+			array( 
+			  "id" => "lastname", 				// will be used as input name and class attributes (spaces prohibited)
+	    	  "label" => "Last Name",			// label displayed to consumer
+	    	  "required" => TRUE 				// field required to submit form (TRUE or FALSE)
+	    	),		
+			array( 
+			  "id" => "email", 					// will be used as input name and class attributes (spaces prohibited)
+	    	  "label" => "Email",				// label displayed to consumer
+	    	  "required" => TRUE 				// field required to submit form (TRUE or FALSE)
+	    	),	    	
+	 );
 
-	$text_inputs = (object) array(
-	 'firstname' => (object) array(
-	      'label' => 'First Name', 			// label displayed to consumer
-	      'required' => 'TRUE'				// field required to submit form (TRUE or FALSE)
-	  ),
-	 'lastname' => (object) array(
-	      'title' => 'Last Name',			// label displayed to consumer
-	      'required' => 'TRUE'				// field required to submit form (TRUE or FALSE)
-	  ),
-	);
+	$text_areas = array(
+			array( 
+			  "id" => "message", 				// will be used as input name and class attributes (spaces prohibited)
+	    	  "label" => "Message",			// label displayed to consumer
+	    	  "required" => TRUE 				// field required to submit form (TRUE or FALSE)
+	    	)  	
+	 );
 
-	$text_areas = (object) array(
-	 'message' => (object) array(
-	      'label' => 'Message',				// label displayed to consumer
-	      'required' => 'TRUE'				// field required to submit form (TRUE or FALSE)
-	  )
-	);
-
-	$submit_button_text = "SUBMIT"; 		// text to appear on form submit button
+	$submit_button_text = "SUBMIT"; 			// text to appear on form submit button
 
 
  /* ========================================================= */
-
 
 
 
@@ -59,27 +66,39 @@
   	
 	  	<section class="contact-form-component">
 	
-			<h2 class="subtitle"></h2>
+	  		<?php if ($form_title): ?>	
+	  			<h1 class="form-title"><?php echo $form_title; ?></h1>
+		    <?php endif; ?>
 
-			<form id ="contactForm" name= "contactForm" class="contactform contactForm span8" method="post" action="">
-				<fieldset class="short left">
-					<input type="text" placeholder="Your Name" name="fullname" class="fullname" />
+			<form name= "contact-form" class="contact-form" method="post" action="">
+					
+				<?php foreach ($text_inputs as $input => $options): ?>
+					
+					<input type="text" 
+						   	placeholder="<?php echo $options['label']; ?>" 
+							name="<?php echo $options['id']; ?>" 
+							class="<?php echo $options['id']; ?> <?php if ($options['required'] == TRUE){echo 'required';}?> " 
+					/>
 					<div class="TxtStatus hide"></div>
-				</fieldset>
-				<fieldset class="short right">
-					<input type="text" placeholder="Your Email" name="email" class="email" />
+
+				<?php endforeach; ?>
+			</textarea>
+				<?php foreach ($text_areas as $textarea => $options): ?>
+					
+					<textarea placeholder="<?php echo $options['label']; ?>" 
+								name="<?php echo $options['id']; ?>" 
+								class="<?php echo $options['id']; ?> <?php if ($options['required'] == TRUE){echo 'required';}?>"
+					></textarea>
+
 					<div class="TxtStatus hide"></div>
-				</fieldset>
-				<fieldset class="long">
-					<input type="text" placeholder="Subject" name="subject" />
-				</fieldset>
-				<textarea placeholder="Message" name="message" class="message"></textarea>
+
+				<?php endforeach; ?>
+
 				<div class="TxtStatus hide"></div>
-				<div class="spacer"></div>
 				<div class="QapTcha"></div>
-				<fieldset>
-					<input type="submit" name='submitButton' class="submitButton" id="submitButton" value="send »" />
-				</fieldset>
+
+				<input type="submit" name="contact-form-submit" class="contact-form-submit" value="<?php echo $submit_button_text;?>" />
+
 			</form>
 
 		</section>

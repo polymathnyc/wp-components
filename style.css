@@ -20,10 +20,14 @@ body {
      padding-bottom: 40px; 
 }
 
-/* 
- * responsive grid 
+/*
+ * =========================================================
+ *
+ *  Responsive Grid component
+ *
+ * =========================================================
  */
-
+	
 .grid-component-wrapper {}
 .grid-component-wrapper .grid-component {
 	list-style: none;
@@ -80,5 +84,42 @@ body {
 	}
 }
 
+/*
+ * =========================================================
+ *
+ *  Contact Form component
+ *
+ * =========================================================
+ */
 
+.contact-form-component {
+	max-width: 768px;
+}
+
+.contact-form-component .contact-form input {
+	width: calc(50% - 20px);
+	margin: 10px;
+	float: left;
+	display: inline-block;
+	padding: 15px;
+}
+
+.contact-form-component .contact-form textarea {
+	width: calc(100% - 20px);
+	margin: 10px;
+	clear: both;
+	display: inline-block;
+	padding: 15px;
+	height: 150px;
+}
+
+/* reduce to 1 column */
+
+@media (max-width: 639px) {
+	.contact-form-component .contact-form input {
+		width: calc(100% - 20px);
+		margin: 10px;
+		clear: both;
+	}
+}
 
