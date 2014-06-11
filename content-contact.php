@@ -8,11 +8,21 @@
  * =========================================================
  */
 	
+	/* TODO
+	 * add form validation for required fields
+	 * validate config options
+	 * create captcha (may require session enabling in functions.php)
+	 */
 
 	// config options
-	$form_title = "Contact Us"; 				// Title to display above form (optional)
-	$columns = "3"; 							// number of columns (2, 3 or 4)
 
+	$to = "mail@andrewbowles.com"; 							// target email address
+	$subject = "Mail from andrewbowles.com";    			// email subject line
+	$headers = "From: Andrew Bowles Website contact Form"; 	// email header
+	$thank = "Thank you for contacting us.";				// thank you message after form is submitted
+
+	$form_title = "Contact Us"; 				// title to display above form (optional)
+	$columns = "3"; 							// number of columns (2, 3 or 4)
 	$text_inputs = array(
 			array( 
 			  "id" => "firstname", 				// will be used as input name and class attributes (spaces prohibited)
@@ -30,7 +40,6 @@
 	    	  "required" => TRUE 				// field required to submit form (TRUE or FALSE)
 	    	),	    	
 	 );
-
 	$text_areas = array(
 			array( 
 			  "id" => "message", 				// will be used as input name and class attributes (spaces prohibited)
@@ -38,7 +47,6 @@
 	    	  "required" => TRUE 				// field required to submit form (TRUE or FALSE)
 	    	)  	
 	 );
-
 	$submit_button_text = "SUBMIT"; 			// text to appear on form submit button
 
 
@@ -50,8 +58,6 @@
 
 	$error = "";
 
-
-
 	// display errors
 
 	if ($error): ?>
@@ -60,9 +66,23 @@
 	
 	<?php else: 
 
-	//display the form 
+		// if form has been posted, analyze it
 
-	?>
+		if(isset($_POST['submit'])) :
+
+			foreach ($_POST as $key => $value) {
+				$msg .= ucfirst ($key) ." : ". $value . "\n";
+			}
+	
+			// send email and display confirmation
+	
+			mail($to, $subject, $msg, $headers); 
+
+		endif;
+
+		// display form
+
+		?>
   	
 	  	<section class="contact-form-component">
 	
