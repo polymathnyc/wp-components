@@ -50,6 +50,7 @@
 	$submit_button_text = "SUBMIT"; 			// text to appear on form submit button
 
 
+
  /* ========================================================= */
 
 
@@ -58,7 +59,7 @@
 
 	$error = "";
 
-	// display errors
+	// display config errors
 
 	if ($error): ?>
 		
@@ -92,29 +93,40 @@
 
 			<form name= "contact-form" class="contact-form" method="post" action="">
 					
+				<?php $input_count = 1; ?>
+
 				<?php foreach ($text_inputs as $input => $options): ?>
 					
-					<input type="text" 
-						   	placeholder="<?php echo $options['label']; ?>" 
-							name="<?php echo $options['id']; ?>" 
-							class="<?php echo $options['id']; ?> <?php if ($options['required'] == TRUE){echo 'required';}?> " 
-					/>
-					<div class="TxtStatus hide"></div>
+					<fieldset class="narrow">
+						<input type="text" 
+							   	placeholder="<?php echo $options['label']; ?>" 
+								name="<?php echo $options['id']; ?>" 
+								class="<?php echo $options['id']; ?> <?php if ($options['required'] == TRUE){echo 'required';}?> " 
+						/>
+						<div class="error-message"></div>
+					</fieldset>
 
+					<?php 
+						if ($input_count % 2 == 0){ 
+							echo "<div class='contact-form-clear'></div>";
+						}
+						$input_count++;
+					?>
 				<?php endforeach; ?>
 			</textarea>
 				<?php foreach ($text_areas as $textarea => $options): ?>
 					
-					<textarea placeholder="<?php echo $options['label']; ?>" 
-								name="<?php echo $options['id']; ?>" 
-								class="<?php echo $options['id']; ?> <?php if ($options['required'] == TRUE){echo 'required';}?>"
-					></textarea>
-
-					<div class="TxtStatus hide"></div>
+					<fieldset class="wide">
+						<textarea placeholder="<?php echo $options['label']; ?>" 
+									name="<?php echo $options['id']; ?>" 
+									class="<?php echo $options['id']; ?> <?php if ($options['required'] == TRUE){echo 'required';}?>"
+						></textarea>
+						<div class="error-message"></div>
+					</fieldset>
 
 				<?php endforeach; ?>
 
-				<div class="TxtStatus hide"></div>
+				<div class="error-message"></div>
 				<div class="QapTcha"></div>
 
 				<input type="submit" name="contact-form-submit" class="contact-form-submit" value="<?php echo $submit_button_text;?>" />
@@ -123,4 +135,67 @@
 
 		</section>
 
-	<?php endif; ?>
+	<?php endif; 
+
+
+
+ /* ========================================================= */
+
+	/* 
+	 * Form validation 
+	 * requires jQuery
+	 * should be moved into footer.php upon implementation
+	 */ 
+
+	?>
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+		
+			//$('.QapTcha').QapTcha();
+
+			var contactform = $('.contact-form');
+			var submitButton = $('.contact-form-submit');
+			var error = false;
+			var required = 'This field is required';
+
+			$('.contactform').on('change', '.error', function () {
+				$(this).removeClass('error').next('.error-message').fadeOut();
+				error = false;
+			});
+			
+			submitButton.click(function(e){
+			 	e.preventDefault();
+				
+				if ( $(".submit").is(":disabled")) {
+
+					// slider hasn't been completed; do nothing
+				 
+				} else {
+
+				 	$(".contact-form .required").each(function(){
+				 		var inputValue = this.value;
+						if (inputValue == null || inputValue == "") {
+							$(this).addClass('error').css('border-color','red').next('.error-message').html(required).fadeIn();
+							error = true;
+						}
+					});
+
+					//submit form
+				 	if (error == false){
+				 		contactform.submit();				 
+				 	}
+
+				}
+				
+			});
+
+			$(".contact-form .required").blur(function(){
+				$(this).css('border-color','#CCC').next('.error-message').fadeOut();	
+				error = false;
+			});
+
+		});
+
+	</script>

@@ -96,22 +96,40 @@ body {
 	max-width: 768px;
 }
 
-.contact-form-component .contact-form input {
-	width: calc(50% - 20px);
+.contact-form-component .contact-form fieldset {
 	margin: 10px;
 	float: left;
 	display: inline-block;
+}
+
+.contact-form-component .contact-form fieldset.narrow {
+	width: calc(50% - 20px);
+}
+
+.contact-form-component .contact-form fieldset.wide {
+	width: calc(100% - 20px);
+}
+
+.contact-form-component .contact-form input, .contact-form-component .contact-form textarea {
 	padding: 15px;
+	width: 100%;
+	display: block;
+	margin: 0;
 }
 
 .contact-form-component .contact-form textarea {
-	width: calc(100% - 20px);
-	margin: 10px;
-	clear: both;
-	display: inline-block;
-	padding: 15px;
 	height: 150px;
 }
+.contact-form-component .contact-form .contact-form-clear {
+	width: 100%;
+	clear: both;
+}
+.contact-form-component .contact-form .error-message {
+	color: red;
+	clear: both;
+	display: none;
+}
+
 
 /* reduce to 1 column */
 

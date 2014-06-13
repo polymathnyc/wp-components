@@ -4,7 +4,7 @@
  * =========================================================
  *
  * Responsive Grid component
- * 2 or 3 column grid of posts from a single category 
+ * 2, 3 or 4 column grid of posts from a single category 
  *
  * =========================================================
  */
