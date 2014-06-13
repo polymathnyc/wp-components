@@ -9,7 +9,6 @@
  */
 	
 	/* TODO
-	 * add form validation for required fields
 	 * validate config options
 	 * create captcha (may require session enabling in functions.php)
 	 */
