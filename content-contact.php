@@ -9,7 +9,6 @@
  */
 	
 	/* TODO
-	 * validate config options
 	 * create captcha (may require session enabling in functions.php)
 	 */
 
@@ -21,7 +20,6 @@
 	$thank = "Thank you for contacting us.";				// thank you message after form is submitted
 
 	$form_title = "Contact Us"; 				// title to display above form (optional)
-	$columns = "3"; 							// number of columns (2, 3 or 4)
 	$text_inputs = array(
 			array( 
 			  "id" => "firstname", 				// will be used as input name and class attributes (spaces prohibited)
@@ -54,9 +52,13 @@
 
 
 
-	 // validate config options
+	// validate config options
 
 	$error = "";
+	if (($to == '') || ($subject == '') || ($headers == '') || ($thank == '') || ($submit_button_text == '')) {
+		$error = "Please provide values for all required config options";
+	}
+
 
 	// display config errors
 
