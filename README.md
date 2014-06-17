@@ -12,3 +12,6 @@ Creates a contact form with configurable text inputs and textareas. The form use
 
 - requires jQuery
 - JS for form validation should be moved into footer.php during implementation
+
+## Custom Nav component
+Navigation bar with optional dropdown menus for child pages
