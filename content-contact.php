@@ -55,10 +55,10 @@
 	// validate config options
 
 	$error = "";
+	
 	if (($to == '') || ($subject == '') || ($headers == '') || ($thank == '') || ($submit_button_text == '')) {
 		$error = "Please provide values for all required config options";
 	}
-
 
 	// display config errors
 
@@ -108,13 +108,16 @@
 					</fieldset>
 
 					<?php 
+						
 						if ($input_count % 2 == 0){ 
 							echo "<div class='contact-form-clear'></div>";
 						}
 						$input_count++;
-					?>
-				<?php endforeach; ?>
+					
+				endforeach; ?>
+			
 			</textarea>
+				
 				<?php foreach ($text_areas as $textarea => $options): ?>
 					
 					<fieldset class="wide">
