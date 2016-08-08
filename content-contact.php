@@ -14,9 +14,9 @@
 
 	// config options
 
-	$to = "mail@andrewbowles.com"; 							// target email address
-	$subject = "Mail from andrewbowles.com";    			// email subject line
-	$headers = "From: Andrew Bowles Website contact Form"; 	// email header
+	$to = ""; 							// target email address
+	$subject = "";    			// email subject line
+	$headers = "From: Website contact Form"; 	// email header
 	$thank = "Thank you for contacting us.";				// thank you message after form is submitted
 
 	$form_title = "Contact Us"; 				// title to display above form (optional)
